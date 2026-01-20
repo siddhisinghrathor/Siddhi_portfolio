@@ -1,7 +1,5 @@
-import React from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import SectionTitle from "./components/SectionTitle";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Skills from "./pages/Skills";
@@ -25,4 +23,3 @@ function App() {
 }
 
 export default App;
-  
