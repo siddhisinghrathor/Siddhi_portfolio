@@ -2,7 +2,7 @@
 
 const Navbar = () => {
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+    <nav className="fixed top-0 left-0 w-full bg-white/5 shadow-md z-50">
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold text-indigo-600">SIDDHI SINGH R@THOR</h1>
         <ul className="flex space-x-6 font-medium">
