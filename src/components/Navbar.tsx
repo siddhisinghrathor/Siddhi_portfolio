@@ -1,37 +1,45 @@
-
+import { useState } from "react";
 
 const Navbar = () => {
+  const [active, setActive] = useState("Home");
+
+  const links = ["Home", "About", "Projects", "Skills", "Contact"];
+
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white/5 shadow-md z-50">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-indigo-600">SIDDHI SINGH R@THOR</h1>
-        <ul className="flex space-x-6 font-medium">
-          <li>
-            <a href="#home" className="hover:text-indigo-600 text-indigo-600">
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#about" className="hover:text-orange-600 text-orange-600">
-              About
-            </a>
-          </li>
-          <li>
-            <a href="#projects" className="hover:text-orange-600 text-orange-600">
-              Projects
-            </a>
-          </li>
-          <li>
-           <a href="#skills" className="hover:text-orange-600 text-orange-600">
-              Skills
-            </a>
-          </li>
-          <li>
-            <a href="#contact" className="hover:text-indigo-600 text-indigo-600"> 
-              Contact
-            </a>
-          </li>
+    <nav
+      className="fixed top-5 left-1/2 -translate-x-1/2 
+      w-[90%] max-w-6xl 
+      bg-white/10 backdrop-blur-lg 
+      border border-white/20 
+      rounded-full px-6 py-3 
+      z-50 shadow-lg"
+    >
+      <div className="flex items-center justify-between">
+
+        {/* LOGO */}
+        <h1 className="text-sm md:text-base font-semibold tracking-wide">
+
+          <span className="text-orange-600">Siddhi Singh R@thor</span>
+        </h1>
+
+        {/* LINKS */}
+        <ul className="hidden md:flex items-center gap-6 text-sm">
+          {links.map((link) => (
+            <li
+              key={link}
+              onClick={() => setActive(link)}
+              className={`cursor-pointer transition-all
+                ${
+                  active === link
+                    ? "text-orange-500"
+                    : "text-gray-300 hover:text-violet-400"
+                }`}
+            >
+              {link}
+            </li>
+          ))}
         </ul>
+
       </div>
     </nav>
   );

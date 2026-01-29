@@ -16,7 +16,7 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section className="relative h-[60vh] py-32 ">
+    <section id="projects" className="relative h-[60vh] py-32 ">
       <div className="max-w-6xl mx-auto px-6">
         <div className="absolute inset-0 -z-10">
         <div
