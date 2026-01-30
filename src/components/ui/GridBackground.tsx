@@ -14,7 +14,7 @@ export default function GridBackground() {
             />
 
       
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#0b0b0f] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center  bg-orange-500/5  [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
         </div>
     );
 }
