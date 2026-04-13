@@ -162,7 +162,8 @@ const Home = () => {
                 View Selected Works
               </button>
               <a 
-                href="/resume.pdf" download
+              target="_blank"
+                href="https://drive.google.com/file/d/11E7YRgGmKBA-q0paemxgnJZDwedSmET8/view?usp=sharing" download
                 className="hover-target px-8 py-4 rounded-full border border-white/20 text-white font-medium hover:bg-white/5 hover:border-white/40 transition-colors duration-300 flex items-center gap-2"
               >
                 Download Resume
@@ -172,7 +173,7 @@ const Home = () => {
 
           {/* RIGHT — PROFILE CARD */}
           <ProfileCard />
-
+ 
         </div>
       </div>
 

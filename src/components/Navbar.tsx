@@ -70,7 +70,8 @@ const Navbar = () => {
           ))}
           <li className="ml-2">
             <a 
-              href="/resume.pdf" download
+            target="_blank"
+              href="https://drive.google.com/file/d/11E7YRgGmKBA-q0paemxgnJZDwedSmET8/view?usp=sharing" download
               className="px-5 py-2 rounded-full bg-white/5 border border-white/10 text-white text-sm font-medium hover:bg-white/10 hover:border-white/30 transition-all duration-300 hover-target"
             >
               Resume

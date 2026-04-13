@@ -5,16 +5,19 @@ import ProjectModal, { type ProjectType } from "../components/ui/ProjectModal";
 
 const projects: ProjectType[] = [
   {
-    title: "GlobalEduConnect",
-    desc: "Full stack education platform using Java & React",
-    tags: ["Java", "React", "MySQL", "Spring Boot"],
-    problem: "Students lacked a centralized, real-time platform to connect with global universities and manage application documents seamlessly without constant emails.",
-    solution: "Developed a distributed architecture platform allowing real-time collaboration, secure document upload via AWS S3, and university tracking dashboards.",
-    features: ["Real-time application tracking", "Role-based access (Student/Admin)", "Encrypted document storage", "Automated email workflows"],
+    title: "Vardhishnu NGO Platform",
+    desc: "A comprehensive digital transformation platform built for Vardhishnu NGO to operate community outreach programs seamlessly.",
+    tags: ["React", "Express Hub", "MongoDB", "Tailwind CSS"],
+    problem: "Vardhishnu relied on paper trails and disconnected systems to manage widespread volunteer orientation data and charity outreaches.",
+    solution: "Designed and deployed a scalable MERN stack web app establishing a digital ecosystem for volunteer logging and transparent donation routing.",
+    features: ["Digital Volunteer Onboarding", "Real-time Event Management", "Donation Integration Hub", "Custom Admin Dashboard"],
+    githubLink: "https://github.com/raunak234362/Vardhishnu",
+    liveLink: "https://vardhishnuorg.vercel.app/",
+    enableImageScroll: true,
     flow: [
-      { step: "01", title: "Apply", desc: "User registers organically and uploads credentials securely to the server." },
-      { step: "02", title: "Analyze", desc: "System verifies documents and intelligently matches with university criteria." },
-      { step: "03", title: "Accept", desc: "Live tracking dashboard updates application status directly to the student." }
+      { step: "01", title: "Outreach", desc: "Volunteers create secure accounts and register for specific impact events." },
+      { step: "02", title: "Action", desc: "Data is routed to the NGO dashboard giving administrators oversight in real-time." },
+      { step: "03", title: "Impact", desc: "Donors directly track organizational milestones and securely allocate funds." }
     ]
   },
   {

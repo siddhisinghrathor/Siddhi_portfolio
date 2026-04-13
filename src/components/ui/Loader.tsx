@@ -29,7 +29,7 @@ const Loader = () => {
             className="flex flex-col items-center"
           >
             <h1 className="text-2xl md:text-3xl font-light text-white tracking-[0.3em] uppercase mb-6">
-              Siddhi <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Rathor</span>
+              Siddhi Singh <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Rathor</span>
             </h1>
             
             {/* Minimal Progress Bar */}

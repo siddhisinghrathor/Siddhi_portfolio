@@ -10,6 +10,9 @@ export type ProjectType = {
   solution: string;
   features: string[];
   flow: { step: string; title: string; desc: string }[];
+  githubLink?: string;
+  liveLink?: string;
+  enableImageScroll?: boolean;
 };
 
 type ProjectModalProps = {
@@ -88,6 +91,21 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                   </motion.p>
                 </div>
 
+                {/* Optional Scrolling Image Preview for Full Web Layouts */}
+                {project.enableImageScroll && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
+                    className="mb-16 w-full h-[400px] border border-white/10 rounded-2xl bg-white/[0.02] overflow-y-auto no-scrollbar relative flex flex-col items-center group cursor-s-resize"
+                  >
+                    {/* Placeholder for the long vertical layout image */}
+                    <div className="absolute inset-0 flex items-center justify-center p-6 text-center text-gray-400 font-light z-0 opacity-50 group-hover:opacity-10 transition-opacity">
+                       [Insert Long Web Layout Image Here later - Area scrolls vertically]
+                    </div>
+                    {/* The user will replace this div with their <img /> tag later. This div simulates a 1200px tall image for scrolling */}
+                    <div className="w-full h-[1200px] flex-shrink-0 bg-gradient-to-b from-transparent via-violet-500/5 to-transparent relative z-10 pointer-events-none" />
+                  </motion.div>
+                )}
+
                 <div className="grid md:grid-cols-2 gap-8 mb-16">
                   <motion.div 
                     initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
@@ -165,12 +183,16 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 </div>
 
                 <div className="mt-12 flex flex-wrap gap-4 justify-end">
-                    <a href="https://github.com" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 bg-white/5 text-white font-medium hover:bg-white/10 hover:border-white/30 transition-colors hover-target group">
-                        Source Code
-                    </a>
-                    <a href="https://google.com" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors hover-target group shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                        Live Preview <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </a>
+                    {project.githubLink && (
+                      <a href={project.githubLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 bg-white/5 text-white font-medium hover:bg-white/10 hover:border-white/30 transition-colors hover-target group">
+                          Source Code
+                      </a>
+                    )}
+                    {project.liveLink && (
+                      <a href={project.liveLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors hover-target group shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                          Live Preview <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </a>
+                    )}
                 </div>
               </div>
             </motion.div>
