@@ -65,9 +65,9 @@ const Home = () => {
         <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-violet-500/40 blur-[120px]" />
         <div className="absolute top-1/2 right-1/5 w-96 h-96 bg-blue-500/20 blur-[120px]" />
       </div>
-
-      {/* ================= FALLING CANVA PIECES ================= */}
-      <motion.div
+{/* 
+      ================= FALLING CANVA PIECES ================= */}
+      {/* <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -88,7 +88,7 @@ const Home = () => {
             style={{ rotate: i % 2 === 0 ? -6 : 6 }}
           />
         ))}
-      </motion.div>
+      </motion.div> */}
 
       {/* ================= CONTENT ================= */}
       <div className="max-w-6xl w-full px-6 relative z-10">
