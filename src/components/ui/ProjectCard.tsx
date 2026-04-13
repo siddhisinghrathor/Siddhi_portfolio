@@ -1,13 +1,13 @@
-import ShapeBlur from "./ShapeBlur";
+
 import { motion } from "framer-motion";
 
 type ProjectCardProps = {
   title: string;
   description: string;
-  variation?: number;
+  // variation?: number;
 };
 
-const ProjectCard = ({ title, description, variation = 0 }: ProjectCardProps) => {
+const ProjectCard = ({ title, description }: ProjectCardProps) => {
   return (
     <motion.div
       whileHover={{ y: -10 }}
@@ -22,14 +22,14 @@ const ProjectCard = ({ title, description, variation = 0 }: ProjectCardProps) =>
         whileHover={{ scale: 1.1, rotate: 5 }}
         className="absolute inset-0 z-0 pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity duration-700"
       >
-        <ShapeBlur
+        {/* <ShapeBlur
           variation={variation}
           shapeSize={1.5}
           roundness={0.4}
           borderSize={0.05}
           circleSize={0.4}
           circleEdge={1}
-        />
+        /> */}
       </motion.div>
 
       {/* OVERLAY FOR READABILITY */}
