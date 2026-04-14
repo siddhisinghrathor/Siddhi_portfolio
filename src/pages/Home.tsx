@@ -1,4 +1,4 @@
-import image from "../assets/images/Profile.jpg";
+import image from "../assets/images/sid pic.jpeg";
 import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
 import React from "react";
 
