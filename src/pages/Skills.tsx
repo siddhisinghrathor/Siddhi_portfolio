@@ -33,7 +33,7 @@ const Skills = () => {
            transition={{ duration: 0.6 }}
            className="text-center mb-12"
         >
-          <h2 className="text-sm tracking-[0.3em] uppercase text-violet-400 mb-2">Expertise</h2>
+         
           <h3 className="text-3xl md:text-5xl font-bold text-white">
             Core <span className="text-orange-500 italic font-light">Skills</span>
           </h3>

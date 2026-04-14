@@ -164,6 +164,7 @@ const Projects = () => {
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
            transition={{ duration: 0.6 }}
+           className="text-center"
         >
           <h3 className="text-3xl md:text-5xl font-bold mb-10 md:mb-16 text-white">
            Projects
