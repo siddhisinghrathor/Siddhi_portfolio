@@ -152,7 +152,7 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
 
   return (
-    <section id="projects" className="relative py-32 md:py-48 overflow-hidden">
+    <section id="projects" className="py-20 md:py-32 relative overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/4 -right-1/4 w-[600px] h-[600px] bg-orange-500/10 blur-[150px] mix-blend-screen rounded-full" />
         <div className="absolute bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-violet-600/10 blur-[150px] mix-blend-screen rounded-full" />

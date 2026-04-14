@@ -19,7 +19,7 @@ const skills = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-32 md:py-48 relative overflow-hidden">
+    <section id="skills" className="py-20 md:py-32 relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute inset-0 -z-10 flex items-center justify-center">
         <div className="w-[800px] h-[800px] bg-violet-600/5 blur-[200px] rounded-full" />
@@ -31,7 +31,7 @@ const Skills = () => {
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
            transition={{ duration: 0.6 }}
-           className="text-center mb-16"
+           className="text-center mb-12"
         >
           <h2 className="text-sm tracking-[0.3em] uppercase text-violet-400 mb-2">Expertise</h2>
           <h3 className="text-3xl md:text-5xl font-bold text-white">
@@ -39,7 +39,7 @@ const Skills = () => {
           </h3>
         </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
           {skills.map((skill, i) => (
             <motion.div 
               key={i}
@@ -47,7 +47,7 @@ const Skills = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className={`px-6 py-3 rounded-2xl border ${skill.color} text-sm md:text-base font-medium transition-all duration-300 hover:scale-105 hover:bg-opacity-20 cursor-default`}
+              className={`px-4 py-3 rounded-xl border ${skill.color} text-xs md:text-sm font-medium transition-all duration-300 hover:scale-105 hover:bg-opacity-20 cursor-default text-center flex items-center justify-center`}
             >
               {skill.name}
             </motion.div>

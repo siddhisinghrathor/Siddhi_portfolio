@@ -114,7 +114,7 @@ const Home = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden py-32 md:py-40"
+      className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center overflow-hidden py-16 md:py-0"
     >
       {/* Background Gradients */}
       <div className="absolute inset-0 -z-20 pointer-events-none">
@@ -123,7 +123,7 @@ const Home = () => {
       </div>
 
       <div className="max-w-6xl w-full px-6 relative z-10">
-        <div className="grid md:grid-cols-2 gap-16 md:gap-12 lg:gap-20 items-center">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-12 lg:gap-20 items-center">
           
           {/* LEFT — TEXT IDENTITY */}
           <motion.div

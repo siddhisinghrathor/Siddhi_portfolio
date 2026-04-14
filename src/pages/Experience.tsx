@@ -30,7 +30,7 @@ const milestones = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-32 md:py-48 relative overflow-hidden">
+    <section id="experience" className="py-20 md:py-32 relative overflow-hidden">
       {/* Background Ambient Glow */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-violet-600/5 blur-[150px] mix-blend-screen rounded-full" />
