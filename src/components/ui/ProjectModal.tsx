@@ -182,14 +182,24 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                   </div>
                 </div>
 
-                <div className="mt-12 flex flex-wrap gap-4 justify-end">
+                <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-end">
                     {project.githubLink && (
-                      <a href={project.githubLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 bg-white/5 text-white font-medium hover:bg-white/10 hover:border-white/30 transition-colors hover-target group">
+                      <a 
+                        href={project.githubLink} 
+                        target="_blank" 
+                        rel="noreferrer" 
+                        className="flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-white/10 bg-white/5 text-white font-medium hover:bg-white/10 hover:border-white/30 transition-all hover-target group w-full sm:w-auto"
+                      >
                           Source Code
                       </a>
                     )}
                     {project.liveLink && (
-                      <a href={project.liveLink} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors hover-target group shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                      <a 
+                        href={project.liveLink} 
+                        target="_blank" 
+                        rel="noreferrer" 
+                        className="flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-semibold rounded-full hover:bg-gray-100 transition-all hover-target group shadow-[0_0_20px_rgba(255,255,255,0.1)] w-full sm:w-auto"
+                      >
                           Live Preview <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </a>
                     )}

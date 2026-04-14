@@ -30,7 +30,7 @@ const milestones = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-32 relative overflow-hidden">
+    <section id="experience" className="py-32 md:py-48 relative overflow-hidden">
       {/* Background Ambient Glow */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-violet-600/5 blur-[150px] mix-blend-screen rounded-full" />
@@ -44,9 +44,9 @@ const Experience = () => {
            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
            className="text-center mb-20"
         >
-          <h2 className="text-sm tracking-[0.3em] uppercase text-violet-400 mb-3 font-semibold">Proof of Work</h2>
+          
           <h3 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-            Experience & <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 italic font-light">Authority</span>
+            Achievements
           </h3>
         </motion.div>
 

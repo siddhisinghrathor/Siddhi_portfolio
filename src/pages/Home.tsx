@@ -80,7 +80,7 @@ const ProfileCard = () => {
         style={{ transformStyle: "preserve-3d", rotateX, rotateY }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="group relative p-[3px] rounded-[2rem] w-64 h-[22rem] md:w-80 md:h-[28rem] transition-shadow duration-700 hover:shadow-[0_20px_60px_-15px_rgba(139,92,246,0.3)] shadow-[0_10px_40px_-20px_rgba(0,0,0,0.5)]"
+        className="group relative p-[3px] rounded-[2rem] w-full max-w-[280px] aspect-[4/5] md:w-80 md:h-[28rem] transition-shadow duration-700 hover:shadow-[0_20px_60px_-15px_rgba(139,92,246,0.3)] shadow-[0_10px_40px_-20px_rgba(0,0,0,0.5)]"
       >
         {/* Animated Gradient Border */}
         <motion.div 
@@ -114,7 +114,7 @@ const Home = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden py-24 md:py-0"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden py-32 md:py-40"
     >
       {/* Background Gradients */}
       <div className="absolute inset-0 -z-20 pointer-events-none">
@@ -123,7 +123,7 @@ const Home = () => {
       </div>
 
       <div className="max-w-6xl w-full px-6 relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid md:grid-cols-2 gap-16 md:gap-12 lg:gap-20 items-center">
           
           {/* LEFT — TEXT IDENTITY */}
           <motion.div
@@ -139,9 +139,9 @@ const Home = () => {
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <h1 className="text-4xl md:text-6xl lg:text-[4.5rem] font-bold tracking-tight text-white leading-[1.1]">
-                Siddhi Singh <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 inline-block mt-2">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-[4.5rem] font-bold tracking-tight text-white leading-[1.1]">
+                Siddhi Singh <span className="hidden sm:inline"><br/></span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 inline-block mt-1 sm:mt-2">
                   Rathor
                 </span>
               </h1>
@@ -154,17 +154,17 @@ const Home = () => {
               Building scalable and impactful digital products. I specialize in bridging complex engineering with elegant, user-centric design.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="pt-8 flex flex-wrap gap-5">
+            <motion.div variants={itemVariants} className="pt-4 md:pt-8 flex flex-col sm:flex-row gap-4 sm:gap-5">
               <button 
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="hover-target px-8 py-4 rounded-full bg-white text-black font-semibold tracking-wide hover:bg-gray-100 transition-colors duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] flex items-center gap-2"
+                className="hover-target px-6 md:px-8 py-3 md:py-4 rounded-full bg-white text-black text-sm md:text-base font-semibold tracking-wide hover:bg-gray-100 transition-colors duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] flex items-center justify-center gap-2"
               >
-                View Selected Works
+                View My Projects
               </button>
               <a 
-              target="_blank"
-                href="https://drive.google.com/file/d/11E7YRgGmKBA-q0paemxgnJZDwedSmET8/view?usp=sharing" download
-                className="hover-target px-8 py-4 rounded-full border border-white/20 text-white font-medium hover:bg-white/5 hover:border-white/40 transition-colors duration-300 flex items-center gap-2"
+                target="_blank"
+                href="https://drive.google.com/file/d/11E7YRgGmKBA-q0paemxgnJZDwedSmET8/view?usp=sharing" rel="noreferrer"
+                className="hover-target px-6 md:px-8 py-3 md:py-4 rounded-full border border-white/20 text-white text-sm md:text-base font-medium hover:bg-white/5 hover:border-white/40 transition-colors duration-300 flex items-center justify-center gap-2"
               >
                 Download Resume
               </a>
@@ -180,7 +180,7 @@ const Home = () => {
       {/* Guided User Scroll CTA */}
       <motion.div 
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-auto cursor-pointer group hover-target hover:opacity-100 opacity-60 transition-opacity"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 pointer-events-auto cursor-pointer group hover-target hover:opacity-100 opacity-60 transition-opacity"
         onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
       >
         <span className="text-[10px] uppercase tracking-[0.3em] text-white/50 group-hover:text-violet-400 transition-colors">Explore My Work</span>

@@ -7,7 +7,7 @@ const projects: ProjectType[] = [
   {
     title: "Vardhishnu NGO Platform",
     desc: "A comprehensive digital transformation platform built for Vardhishnu NGO to operate community outreach programs seamlessly.",
-    tags: ["React", "Express Hub", "MongoDB", "Tailwind CSS"],
+    tags: ["React", "Express.js", "MongoDB", "Tailwind CSS"],
     problem: "Vardhishnu relied on paper trails and disconnected systems to manage widespread volunteer orientation data and charity outreaches.",
     solution: "Designed and deployed a scalable MERN stack web app establishing a digital ecosystem for volunteer logging and transparent donation routing.",
     features: ["Digital Volunteer Onboarding", "Real-time Event Management", "Donation Integration Hub", "Custom Admin Dashboard"],
@@ -94,7 +94,7 @@ const TiltCard = ({ project, index, onClick }: { project: ProjectType; index: nu
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      className="group relative h-[420px] rounded-[1.5rem] bg-white/[0.03] backdrop-blur-xl border border-white/10 transition-all hover:-translate-y-2 duration-500 cursor-pointer hover-target shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_40px_rgba(139,92,246,0.15)] flex flex-col overflow-hidden"
+      className="group relative h-[380px] md:h-[420px] rounded-[1.5rem] bg-white/[0.03] backdrop-blur-xl border border-white/10 transition-all hover:-translate-y-2 duration-500 cursor-pointer hover-target shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:shadow-[0_20px_40px_rgba(139,92,246,0.15)] flex flex-col overflow-hidden"
     >
       {/* Magic Hover Border & Inner Light (hidden on mobile via group-hover logic normally, but opacity 0 initially) */}
       <motion.div 
@@ -114,7 +114,7 @@ const TiltCard = ({ project, index, onClick }: { project: ProjectType; index: nu
 
       <div 
         style={{ transform: "translateZ(40px)" }} 
-        className="p-8 flex flex-col h-full relative z-10"
+        className="p-6 md:p-8 flex flex-col h-full relative z-10"
       >
         {/* Placeholder for project image mock/gradient */}
         <div className="w-full h-32 shrink-0 mb-6 rounded-xl bg-gradient-to-br from-violet-500/10 to-orange-500/5 border border-white/5 relative overflow-hidden flex items-center justify-center pointer-events-none">
@@ -123,11 +123,11 @@ const TiltCard = ({ project, index, onClick }: { project: ProjectType; index: nu
         </div>
 
         <div className="flex-1 flex flex-col">
-          <h3 className="text-2xl text-white font-bold mb-2 tracking-tight group-hover:text-orange-400 transition-colors pointer-events-none">
+          <h3 className="text-xl md:text-2xl text-white font-bold mb-2 tracking-tight group-hover:text-orange-400 transition-colors pointer-events-none">
             {project.title}
           </h3>
 
-          <p className="text-gray-400 text-sm line-clamp-2 leading-relaxed font-light pointer-events-none mb-4">
+          <p className="text-gray-400 text-xs md:text-sm line-clamp-2 md:line-clamp-3 leading-relaxed font-light pointer-events-none mb-4">
             {project.desc}
           </p>
 
@@ -152,7 +152,7 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
 
   return (
-    <section id="projects" className="relative py-32 overflow-hidden">
+    <section id="projects" className="relative py-32 md:py-48 overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/4 -right-1/4 w-[600px] h-[600px] bg-orange-500/10 blur-[150px] mix-blend-screen rounded-full" />
         <div className="absolute bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-violet-600/10 blur-[150px] mix-blend-screen rounded-full" />
@@ -165,13 +165,12 @@ const Projects = () => {
            viewport={{ once: true }}
            transition={{ duration: 0.6 }}
         >
-          <h2 className="text-sm tracking-[0.3em] uppercase text-violet-400 mb-2">Portfolio</h2>
-          <h3 className="text-4xl md:text-5xl font-bold mb-16 text-white">
-            Selected <span className="text-orange-500 italic font-light">Works</span>
+          <h3 className="text-3xl md:text-5xl font-bold mb-10 md:mb-16 text-white">
+           Projects
           </h3>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 perspective-1000">
           {projects.map((p, i) => (
             <TiltCard key={i} project={p} index={i} onClick={() => setSelectedProject(p)} />
           ))}
