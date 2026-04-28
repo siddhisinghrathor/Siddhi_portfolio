@@ -12,6 +12,8 @@ export type ProjectType = {
   flow: { step: string; title: string; desc: string }[];
   githubLink?: string;
   liveLink?: string;
+  image?: string;
+  approach?: string;
   enableImageScroll?: boolean;
 };
 
@@ -91,18 +93,27 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                   </motion.p>
                 </div>
 
-                {/* Optional Scrolling Image Preview for Full Web Layouts */}
-                {project.enableImageScroll && (
+                {/* Project Image Preview */}
+                {project.image && (
                   <motion.div 
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
-                    className="mb-16 w-full h-[400px] border border-white/10 rounded-2xl bg-white/[0.02] overflow-y-auto no-scrollbar relative flex flex-col items-center group cursor-s-resize"
+                    className={`mb-16 w-full ${project.enableImageScroll ? "h-[400px] overflow-y-auto cursor-s-resize" : "h-auto overflow-hidden"} border border-white/10 rounded-2xl bg-white/[0.02] no-scrollbar relative flex flex-col items-center group`}
                   >
-                    {/* Placeholder for the long vertical layout image */}
-                    <div className="absolute inset-0 flex items-center justify-center p-6 text-center text-gray-400 font-light z-0 opacity-50 group-hover:opacity-10 transition-opacity">
-                       [Insert Long Web Layout Image Here later - Area scrolls vertically]
-                    </div>
-                    {/* The user will replace this div with their <img /> tag later. This div simulates a 1200px tall image for scrolling */}
-                    <div className="w-full h-[1200px] flex-shrink-0 bg-gradient-to-b from-transparent via-violet-500/5 to-transparent relative z-10 pointer-events-none" />
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className={`w-full h-auto ${project.enableImageScroll ? "flex-shrink-0" : "object-contain"}`}
+                    />
+                  </motion.div>
+                )}
+
+                {project.approach && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }}
+                    className="mb-16 p-8 rounded-2xl bg-violet-600/5 border border-violet-500/10"
+                  >
+                    <h3 className="text-xl font-bold text-white mb-4">Approach & Thought Process</h3>
+                    <p className="text-gray-400 leading-relaxed font-light">{project.approach}</p>
                   </motion.div>
                 )}
 

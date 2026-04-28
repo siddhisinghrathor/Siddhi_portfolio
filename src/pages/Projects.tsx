@@ -2,8 +2,28 @@ import { motion, useMotionTemplate, useMotionValue, useSpring } from "framer-mot
 import { ArrowRight } from "lucide-react";
 import React, { useState } from "react";
 import ProjectModal, { type ProjectType } from "../components/ui/ProjectModal";
+import flexiCatalogImg from "../assets/FlexiCatelog.png";
+import ngoImg from "../assets/ngo.png";
+
 
 const projects: ProjectType[] = [
+  {
+    title: "FlexiCatalog",
+    desc: "A dynamic multi-category product catalog that parses JSON and renders item details based on category-specific properties.",
+    tags: ["React", "Tailwind CSS", "Vite", "React Router", "Vercel"],
+    problem: "Building a UI that can handle dynamic data with varying attributes across multiple categories without hardcoding logic.",
+    solution: "Structured the application to dynamically iterate over itemprops, ensuring a clean, scalable, and responsive UI for various product types.",
+    approach: "My primary focus was to build a clean and scalable UI that can handle dynamic data without hardcoding any category-specific logic. I structured the application to dynamically render product details by iterating over the itemprops array, ensuring good visual hierarchy and usability across all categories.",
+    features: ["Dynamic Item Rendering", "Category-based Grouping", "Responsive Fluid Layout", "Modern UI with Aceternity & React Bits"],
+    liveLink: "https://catalog-x.vercel.app",
+    image: flexiCatalogImg,
+    enableImageScroll: true,
+    flow: [
+      { step: "01", title: "Overview", desc: "Grouping items by category on the home screen for clear visual hierarchy." },
+      { step: "02", title: "Navigation", desc: "Smooth transition from category view to detailed item pages." },
+      { step: "03", title: "Rendering", desc: "Dynamic rendering of all product attributes from the itemprops array." }
+    ]
+  },
   {
     title: "Vardhishnu NGO Platform",
     desc: "A comprehensive digital transformation platform built for Vardhishnu NGO to operate community outreach programs seamlessly.",
@@ -13,6 +33,7 @@ const projects: ProjectType[] = [
     features: ["Digital Volunteer Onboarding", "Real-time Event Management", "Donation Integration Hub", "Custom Admin Dashboard"],
     githubLink: "https://github.com/raunak234362/Vardhishnu",
     liveLink: "https://vardhishnuorg.vercel.app/",
+    image: ngoImg,
     enableImageScroll: true,
     flow: [
       { step: "01", title: "Outreach", desc: "Volunteers create secure accounts and register for specific impact events." },
@@ -116,10 +137,20 @@ const TiltCard = ({ project, index, onClick }: { project: ProjectType; index: nu
         style={{ transform: "translateZ(40px)" }} 
         className="p-6 md:p-8 flex flex-col h-full relative z-10"
       >
-        {/* Placeholder for project image mock/gradient */}
+        {/* Project Image Preview */}
         <div className="w-full h-32 shrink-0 mb-6 rounded-xl bg-gradient-to-br from-violet-500/10 to-orange-500/5 border border-white/5 relative overflow-hidden flex items-center justify-center pointer-events-none">
-             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjEpIi8+PC9zdmc+')] opacity-20" />
-             <span className="text-white/30 font-mono text-xs uppercase tracking-[0.2em] group-hover:text-violet-300 transition-colors duration-300">Preview Layout</span>
+          {project.image ? (
+            <img 
+              src={project.image} 
+              alt={project.title} 
+              className="w-full h-full object-cover object-top opacity-60 group-hover:opacity-100 transition-opacity duration-500" 
+            />
+          ) : (
+            <>
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjEpIi8+PC9zdmc+')] opacity-20" />
+              <span className="text-white/30 font-mono text-xs uppercase tracking-[0.2em] group-hover:text-violet-300 transition-colors duration-300">Preview Layout</span>
+            </>
+          )}
         </div>
 
         <div className="flex-1 flex flex-col">
