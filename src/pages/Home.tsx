@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import image from "../assets/images/sid pic.jpeg";
+import photoFrame from "../assets/images/photoframe_mat.png";
 
 const Home = () => {
   // Cursor glow position tracker
@@ -63,7 +64,7 @@ const Home = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col justify-between overflow-hidden pt-36 pb-12 px-6 md:px-12 border-b border-white/5"
+      className="relative min-h-screen flex flex-col justify-between overflow-hidden pt-36 pb-12 px-6 md:px-12"
     >
       {/* Background vignette wrapper */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#050505_95%)] pointer-events-none z-0" />
@@ -160,18 +161,18 @@ const Home = () => {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT: PORTRAIT AND COLLAGE FRAMEWORK */}
+          {/* RIGHT: PORTRAIT AND PHOTO FRAME WORK */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2">
-            <div className="relative w-full max-w-[320px] sm:max-w-[340px] md:max-w-[380px] aspect-[3/4] mx-auto lg:ml-auto">
+            <div className="relative w-full max-w-[420px] sm:max-w-[480px] md:max-w-[540px] lg:max-w-[560px] aspect-square mx-auto lg:ml-auto">
               
-              {/* Background decorative secondary frame (FIG. 03) */}
-              <div className="absolute -top-12 -right-8 w-28 aspect-[3/4] border border-white/5 bg-[#0a0a0a]/20 p-1 hidden xl:block -rotate-6 z-0 select-none">
+              {/* Background decorative frame accent */}
+              <div className="absolute -top-8 -right-8 w-32 aspect-square border border-white/5 bg-[#0a0a0a]/20 p-1 hidden xl:block -rotate-6 z-0 select-none">
                 <div className="w-full h-full bg-[#050505] flex items-center justify-center text-[7px] font-mono text-white/20 text-center">
-                  [ FIG. 03 ]
+                  [ FIG. 01 ]
                 </div>
               </div>
 
-              {/* Main Profile Frame */}
+              {/* Main Profile Frame with photoframe overlay and tilted stance */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -179,24 +180,33 @@ const Home = () => {
                 onMouseMove={handleCardMouseMove}
                 onMouseLeave={handleCardMouseLeave}
                 style={{ x: cardX, y: cardY }}
-                className="relative p-2 border border-white/10 bg-[#0a0a0a]/30 w-full h-full transition-colors duration-500 hover:border-[#FF4FA3]/50 group z-10"
+                className="relative w-full h-full group z-10 -rotate-3 hover:rotate-0 transition-transform duration-500"
               >
-                {/* Image Frame */}
-                <div className="w-full h-[90%] border border-white/5 bg-[#050505] overflow-hidden relative">
+                {/* Photo fitted inside photoframe's window */}
+                <div 
+                  className="absolute overflow-hidden rounded-[1px] bg-[#050505]"
+                  style={{
+                    left: "22.5%",
+                    top: "21.5%",
+                    width: "59.2%",
+                    height: "68.8%",
+                  }}
+                >
                   <img
                     src={image}
                     alt="Siddhi Singh Rathor Portrait"
                     loading="eager"
-                    className="w-full h-full object-cover transition-all duration-700"
+                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
 
-                {/* Caption */}
-                <div className="flex justify-between items-center mt-3 font-mono text-[8px] tracking-wider text-[#8A8A8A] uppercase">
-                  <span>01 // PRIMARY PORTRAIT</span>
-                  <span>SYS_ID: 98_01</span>
-                </div>
-
+                {/* Photoframe Overlay */}
+                <img
+                  src={photoFrame}
+                  alt="Photo Frame Overlay"
+                  loading="eager"
+                  className="absolute inset-0 w-full h-full object-contain pointer-events-none drop-shadow-[0_25px_50px_rgba(0,0,0,0.85)]"
+                />
               </motion.div>
             </div>
           </div>
@@ -204,16 +214,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* BOTTOM SECTION: PULSING STATE */}
-      <div className="max-w-[1400px] w-full mx-auto flex justify-between items-end relative z-10 mt-8">
-        
-        {/* Pulsing indicator */}
-        <div className="flex items-center gap-2 font-mono text-[9px] text-[#8A8A8A] uppercase tracking-wider">
-          <span>01 ● SYSTEM ONLINE</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-[#FF4FA3] animate-ping" />
-        </div>
 
-      </div>
     </section>
   );
 };

@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import doodleBg from "../../assets/images/doodle background.jpg";
 
 export default function GridBackground() {

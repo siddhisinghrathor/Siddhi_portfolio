@@ -31,12 +31,23 @@ const Skills = () => {
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
            transition={{ duration: 0.6 }}
-           className="text-center mb-12"
+           className="text-center mb-16 max-w-3xl mx-auto space-y-6"
         >
-         
           <h3 className="text-3xl md:text-5xl font-bold text-white">
-            Core <span className="text-orange-500 italic font-light">Skills</span>
+            Core <span className="text-[#FF4FA3] italic font-light">Skills</span> & Mindset
           </h3>
+
+          <div className="font-serif italic text-base md:text-lg text-[#8A8A8A] leading-relaxed space-y-4 text-center md:text-left bg-[#0a0a0a]/30 p-6 md:p-8 rounded-2xl border border-white/5 backdrop-blur-sm">
+            <p>
+              I’m a curious human who loves figuring out how things work — and then trying to build them myself.
+            </p>
+            <p>
+              I like learning new things, experimenting with ideas, breaking things, fixing them, and turning random “what if?” thoughts into something real. From code to design to things I’ve never tried before, I’m always curious to explore what I can create.
+            </p>
+            <p className="text-[#F5F5F5] font-medium">
+              I don’t really like putting myself in one box. I’m here to learn, build, experiment, and see how far I can go.
+            </p>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
