@@ -1,201 +1,221 @@
+import { useState, useEffect } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import image from "../assets/images/sid pic.jpeg";
-import { motion, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
-import React from "react";
-
-/* ================= VARIANTS ================= */
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
-} as const;
-
-// Calm, premium fade and slight slide up
-const itemVariants = {
-  hidden: { opacity: 0, y: 15 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
-  },
-} as const;
-
-// Floating animation for the image
-const floatingAnimation = {
-  y: ["-8px", "8px"],
-  transition: {
-    y: {
-      duration: 3,
-      repeat: Infinity,
-      repeatType: "mirror" as const,
-      ease: "easeInOut" as const,
-    },
-  },
-};
-
-/* ================= COMPONENTS ================= */
-
-const ProfileCard = () => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useSpring(useMotionValue(0), { stiffness: 150, damping: 20 });
-  const rotateY = useSpring(useMotionValue(0), { stiffness: 150, damping: 20 });
-
-  function handleMouseMove(event: React.MouseEvent<HTMLDivElement>) {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    mouseX.set(x);
-    mouseY.set(y);
-
-    const rX = (y / rect.height - 0.5) * -10;
-    const rY = (x / rect.width - 0.5) * 10;
-
-    rotateX.set(rX);
-    rotateY.set(rY);
-  }
-
-  function handleMouseLeave() {
-    mouseX.set(0);
-    mouseY.set(0);
-    rotateX.set(0);
-    rotateY.set(0);
-  }
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95, y: 30 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-      className="flex justify-center md:justify-end md:col-span-1 order-1 md:order-2 perspective-1000 w-full"
-    >
-      <motion.div
-        animate={floatingAnimation}
-        style={{ transformStyle: "preserve-3d", rotateX, rotateY }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className="group relative p-[3px] rounded-[2rem] w-full max-w-[280px] aspect-[4/5] md:w-80 md:h-[28rem] transition-shadow duration-700 hover:shadow-[0_20px_60px_-15px_rgba(139,92,246,0.3)] shadow-[0_10px_40px_-20px_rgba(0,0,0,0.5)]"
-      >
-        {/* Animated Gradient Border */}
-        <motion.div 
-          className="absolute inset-0 rounded-[2rem] opacity-40 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-          style={{
-            background: useMotionTemplate`radial-gradient(300px circle at ${mouseX}px ${mouseY}px, rgba(139, 92, 246, 0.8), rgba(249, 115, 22, 0.4), transparent 80%)`,
-          }}
-        />
-
-        {/* Inner Card & Image */}
-        <div className="relative w-full h-full bg-[#0a0a0a] rounded-[1.85rem] overflow-hidden border border-white/5" style={{ transform: "translateZ(20px)" }}>
-          {/* Subtle blurred backdrop fallback block */}
-          <div className="absolute inset-0 bg-violet-600/10 blur-xl pointer-events-none" />
-          
-          <img
-            src={image}
-            alt="Siddhi Singh Rathor Portrait"
-            loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-          />
-          {/* Vignette effect for depth */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/20 to-transparent mix-blend-overlay pointer-events-none" />
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-};
 
 const Home = () => {
+  // Cursor glow position tracker
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+      setIsHovered(true);
+    };
+    const handleMouseLeave = () => {
+      setIsHovered(false);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseleave", handleMouseLeave);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
+  // Profile image tilt/shift spring animation
+  const cardX = useSpring(useMotionValue(0), { stiffness: 120, damping: 20 });
+  const cardY = useSpring(useMotionValue(0), { stiffness: 120, damping: 20 });
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    cardX.set(x * 0.05); // Max 5px shift
+    cardY.set(y * 0.05);
+  };
+
+  const handleCardMouseLeave = () => {
+    cardX.set(0);
+    cardY.set(0);
+  };
+
+  // Staggered load animation variants
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  } as const;
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    },
+  } as const;
+
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center overflow-hidden py-16 md:py-0"
+      className="relative min-h-screen flex flex-col justify-between overflow-hidden pt-36 pb-12 px-6 md:px-12 border-b border-white/5"
     >
-      {/* Background Gradients */}
-      <div className="absolute inset-0 -z-20 pointer-events-none">
-        <div className="absolute top-1/3 right-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-violet-600/15 blur-[120px] md:blur-[180px] mix-blend-screen rounded-full" />
-        <div className="absolute bottom-1/4 left-1/4 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-orange-500/10 blur-[100px] md:blur-[160px] mix-blend-screen rounded-full" />
+      {/* Background vignette wrapper */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,#050505_95%)] pointer-events-none z-0" />
+
+      {/* Extremely subtle cursor follow glow */}
+      {isHovered && (
+        <div 
+          className="pointer-events-none fixed inset-0 z-0 transition-opacity duration-500 opacity-30"
+          style={{
+            background: `radial-gradient(500px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 79, 163, 0.035), transparent 80%)`
+          }}
+        />
+      )}
+
+      {/* Grid crosshair corner decorations */}
+      <div className="absolute top-24 left-8 pointer-events-none font-mono text-[7px] text-white/10 select-none hidden lg:block">
+        + SYS.CR01 / LAT.42
+      </div>
+      <div className="absolute top-24 right-8 pointer-events-none font-mono text-[7px] text-white/10 select-none hidden lg:block">
+        [ X_09 / Y_87 ]
       </div>
 
-      <div className="max-w-6xl w-full px-6 relative z-10">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-12 lg:gap-20 items-center">
+      {/* Content wrapper */}
+      <div className="max-w-[1400px] w-full mx-auto my-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
           
-          {/* LEFT — TEXT IDENTITY */}
+          {/* LEFT: TEXT IDENTITY (Massive Typography Scale) */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="space-y-6 order-2 md:order-1 flex flex-col justify-center"
+            className="lg:col-span-7 space-y-8 flex flex-col justify-center order-2 lg:order-1"
           >
-            <motion.div variants={itemVariants}>
-              <h2 className="text-violet-400 text-xs md:text-sm tracking-[0.3em] uppercase font-semibold">
-                Software Engineer
-              </h2>
+            {/* Top editorial labels */}
+            <motion.div 
+              variants={itemVariants} 
+              className="flex flex-wrap items-center gap-4 text-[9px] font-mono tracking-widest text-[#8A8A8A] uppercase"
+            >
+              <span className="flex items-center gap-1.5">
+                <span className="w-1 h-1 rounded-full bg-[#FF4FA3]" /> 
+                ISSUE 01 / 2026
+              </span>
+              <span className="text-white/10">|</span>
+              <span>SOFTWARE ENGINEER</span>
+              <span className="text-white/10">|</span>
+              <span>BASED IN INDIA</span>
             </motion.div>
 
-            <motion.div variants={itemVariants}>
-              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-[4.5rem] font-bold tracking-tight text-white leading-[1.1]">
-                Siddhi Singh <span className="hidden sm:inline"><br/></span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 inline-block mt-1 sm:mt-2">
-                  Rathor
+            {/* Title display header (Colossal Scale) */}
+            <motion.div variants={itemVariants} className="space-y-1">
+              <h1 className="text-6xl sm:text-8xl md:text-[6.5rem] lg:text-[7rem] xl:text-[8.5rem] font-display font-extrabold tracking-tighter text-[#F5F5F5] leading-[0.78] uppercase">
+                Siddhi <br />
+                <span className="text-[#FF4FA3]">
+                  S
+                  <span className="relative inline-block">
+                    ı
+                    <span className="absolute -top-[0.28em] left-1/2 -translate-x-1/2 text-[0.45em] leading-none">
+                      ♥
+                    </span>
+                  </span>
+                  ngh
+                </span> <br />
+                <span className="text-transparent [-webkit-text-stroke:1px_#F5F5F5]">
+                  Rathor.
                 </span>
+                <span className="text-[#FF4FA3] text-3xl sm:text-5xl font-mono align-super ml-1.5">✦</span>
               </h1>
             </motion.div>
 
+            {/* Paragraph description */}
             <motion.p
               variants={itemVariants}
-              className="text-gray-400 max-w-lg text-lg md:text-xl leading-relaxed font-light mt-4"
+              className="text-[#8A8A8A] max-w-lg text-sm md:text-base leading-relaxed font-body"
             >
-              Building scalable and impactful digital products. I specialize in bridging complex engineering with elegant, user-centric design.
+              Building scalable and impactful digital products. I specialize in bridging complex engineering with elegant, user-centric design. Designed & coded as an active creative campaign.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="pt-4 md:pt-8 flex flex-col sm:flex-row gap-4 sm:gap-5">
-              <button 
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="hover-target px-6 md:px-8 py-3 md:py-4 rounded-full bg-white text-black text-sm md:text-base font-semibold tracking-wide hover:bg-gray-100 transition-colors duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] flex items-center justify-center gap-2"
-              >
-                View My Projects
-              </button>
+            {/* Buttons with hover transitions */}
+            <motion.div 
+              variants={itemVariants} 
+              className="pt-2 flex flex-col sm:flex-row gap-4"
+            >
               <a 
                 target="_blank"
-                href="https://drive.google.com/file/d/11E7YRgGmKBA-q0paemxgnJZDwedSmET8/view?usp=sharing" rel="noreferrer"
-                className="hover-target px-6 md:px-8 py-3 md:py-4 rounded-full border border-white/20 text-white text-sm md:text-base font-medium hover:bg-white/5 hover:border-white/40 transition-colors duration-300 flex items-center justify-center gap-2"
+                href="https://drive.google.com/file/d/11E7YRgGmKBA-q0paemxgnJZDwedSmET8/view?usp=sharing" 
+                rel="noreferrer"
+                className="group relative inline-flex items-center justify-center px-6 py-3.5 border border-white/10 hover:border-[#FF4FA3] hover:text-[#FF4FA3] text-[#8A8A8A] transition-all duration-300 font-mono text-[9px] md:text-[10px] uppercase tracking-widest font-bold"
               >
-                Download Resume
+                <span className="flex items-center gap-2">
+                  Download Resume 
+                  <span className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300">&nearr;</span>
+                </span>
               </a>
             </motion.div>
           </motion.div>
 
-          {/* RIGHT — PROFILE CARD */}
-          <ProfileCard />
- 
+          {/* RIGHT: PORTRAIT AND COLLAGE FRAMEWORK */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2">
+            <div className="relative w-full max-w-[320px] sm:max-w-[340px] md:max-w-[380px] aspect-[3/4] mx-auto lg:ml-auto">
+              
+              {/* Background decorative secondary frame (FIG. 03) */}
+              <div className="absolute -top-12 -right-8 w-28 aspect-[3/4] border border-white/5 bg-[#0a0a0a]/20 p-1 hidden xl:block -rotate-6 z-0 select-none">
+                <div className="w-full h-full bg-[#050505] flex items-center justify-center text-[7px] font-mono text-white/20 text-center">
+                  [ FIG. 03 ]
+                </div>
+              </div>
+
+              {/* Main Profile Frame */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+                onMouseMove={handleCardMouseMove}
+                onMouseLeave={handleCardMouseLeave}
+                style={{ x: cardX, y: cardY }}
+                className="relative p-2 border border-white/10 bg-[#0a0a0a]/30 w-full h-full transition-colors duration-500 hover:border-[#FF4FA3]/50 group z-10"
+              >
+                {/* Image Frame */}
+                <div className="w-full h-[90%] border border-white/5 bg-[#050505] overflow-hidden relative">
+                  <img
+                    src={image}
+                    alt="Siddhi Singh Rathor Portrait"
+                    loading="eager"
+                    className="w-full h-full object-cover transition-all duration-700"
+                  />
+                </div>
+
+                {/* Caption */}
+                <div className="flex justify-between items-center mt-3 font-mono text-[8px] tracking-wider text-[#8A8A8A] uppercase">
+                  <span>01 // PRIMARY PORTRAIT</span>
+                  <span>SYS_ID: 98_01</span>
+                </div>
+
+              </motion.div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      {/* Guided User Scroll CTA */}
-      <motion.div 
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 pointer-events-auto cursor-pointer group hover-target hover:opacity-100 opacity-60 transition-opacity"
-        onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-      >
-        <span className="text-[10px] uppercase tracking-[0.3em] text-white/50 group-hover:text-violet-400 transition-colors">Explore My Work</span>
-        <motion.div
-           animate={{ y: [0, 8, 0] }}
-           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-           className="w-5 h-8 border border-white/20 rounded-full flex justify-center p-1 group-hover:border-violet-500/50 transition-colors"
-        >
-          <motion.div className="w-1 h-2 bg-white/40 rounded-full group-hover:bg-violet-400 transition-colors" />
-        </motion.div>
-      </motion.div>
+      {/* BOTTOM SECTION: PULSING STATE */}
+      <div className="max-w-[1400px] w-full mx-auto flex justify-between items-end relative z-10 mt-8">
+        
+        {/* Pulsing indicator */}
+        <div className="flex items-center gap-2 font-mono text-[9px] text-[#8A8A8A] uppercase tracking-wider">
+          <span>01 ● SYSTEM ONLINE</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#FF4FA3] animate-ping" />
+        </div>
 
+      </div>
     </section>
   );
 };
 
 export default Home;
-

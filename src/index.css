@@ -14,7 +14,7 @@ a, button, input, textarea, select {
 }
 
 ::selection {
-  background: rgba(139, 92, 246, 0.3);
+  background: rgba(255, 79, 163, 0.3);
 }
 
 /* Keep cursor on small devices */

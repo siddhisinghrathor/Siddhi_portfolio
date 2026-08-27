@@ -1,18 +1,22 @@
 import { cn } from "@/lib/utils";
+import doodleBg from "../../assets/images/doodle background.jpg";
 
 export default function GridBackground() {
     return (
         <div className="fixed inset-0 -z-50 w-full h-full bg-black">
-            {/* The Grid */}
-            <div
-                className={cn(
-                    "absolute inset-0 pointer-events-none",
-                    "[background-size:40px_40px]",
-                    "[background-image:linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)]",
-                    
-                )}
-            />
 
+            {/* Faded Doodle Background above the grid layer */}
+            <div 
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                    backgroundImage: `url(${doodleBg})`,
+                    backgroundAttachment: "fixed",
+                    backgroundRepeat: "repeat",
+                    backgroundSize: "1200px",
+                    opacity: 0.035,
+                    filter: "invert(1)",
+                }}
+            />
       
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center  bg-orange-500/5  [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
         </div>
