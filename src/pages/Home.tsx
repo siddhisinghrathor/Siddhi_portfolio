@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import image from "../assets/images/sid pic.jpeg";
-import photoFrame from "../assets/images/photoframe_mat.png";
+import { motion } from "framer-motion";
+import gradHatImg from "../assets/images/gradhat_clean.png";
+import paperRocketImg from "../assets/images/paper_rocket_clean.png";
+import hourglassImg from "../assets/images/hourglass_clean.png";
+import magnifyingGlassImg from "../assets/images/magnifying_glass_clean.png";
+import clockImg from "../assets/images/clock_clean.png";
+import brainImg from "../assets/images/brain_clean.png";
 
 const Home = () => {
   // Cursor glow position tracker
@@ -23,23 +27,6 @@ const Home = () => {
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
-
-  // Profile image tilt/shift spring animation
-  const cardX = useSpring(useMotionValue(0), { stiffness: 120, damping: 20 });
-  const cardY = useSpring(useMotionValue(0), { stiffness: 120, damping: 20 });
-
-  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    cardX.set(x * 0.05); // Max 5px shift
-    cardY.set(y * 0.05);
-  };
-
-  const handleCardMouseLeave = () => {
-    cardX.set(0);
-    cardY.set(0);
-  };
 
   // Staggered load animation variants
   const containerVariants = {
@@ -79,139 +66,138 @@ const Home = () => {
         />
       )}
 
-      {/* Grid crosshair corner decorations */}
-      <div className="absolute top-24 left-8 pointer-events-none font-mono text-[7px] text-white/10 select-none hidden lg:block">
-        + SYS.CR01 / LAT.42
-      </div>
-      <div className="absolute top-24 right-8 pointer-events-none font-mono text-[7px] text-white/10 select-none hidden lg:block">
-        [ X_09 / Y_87 ]
-      </div>
+      {/* Far Top-Left Corner Clock Doodle (Above Gradhat & Tilted Right) */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, rotate: 15 }}
+        animate={{ opacity: 1, scale: 1, rotate: 12 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className="absolute top-20 left-6 sm:top-24 sm:left-10 lg:top-28 lg:left-16 z-20 pointer-events-auto group"
+      >
+        <img
+          src={clockImg}
+          alt="Clock"
+          className="w-28 sm:w-36 md:w-48 lg:w-56 h-auto object-contain filter drop-shadow-[0_15px_35px_rgba(255,79,163,0.35)] group-hover:-translate-y-3 group-hover:rotate-18 group-hover:scale-110 transition-all duration-500"
+        />
+      </motion.div>
 
-      {/* Content wrapper */}
-      <div className="max-w-[1400px] w-full mx-auto my-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
-          
-          {/* LEFT: TEXT IDENTITY (Massive Typography Scale) */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="lg:col-span-7 space-y-8 flex flex-col justify-center order-2 lg:order-1"
-          >
-            {/* Top editorial labels */}
-            <motion.div 
-              variants={itemVariants} 
-              className="flex flex-wrap items-center gap-4 text-[9px] font-mono tracking-widest text-[#8A8A8A] uppercase"
-            >
-              <span className="flex items-center gap-1.5">
-                <span className="w-1 h-1 rounded-full bg-[#FF4FA3]" /> 
-                ISSUE 01 / 2026
-              </span>
-              <span className="text-white/10">|</span>
-              <span>SOFTWARE ENGINEER</span>
-              <span className="text-white/10">|</span>
-              <span>BASED IN INDIA</span>
-            </motion.div>
+      {/* Far Bottom-Left Corner Hourglass Doodle */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, rotate: 12 }}
+        animate={{ opacity: 1, scale: 1, rotate: 10 }}
+        transition={{ duration: 0.9, delay: 0.5 }}
+        className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 lg:bottom-12 lg:left-14 z-20 pointer-events-auto group"
+      >
+        <img
+          src={hourglassImg}
+          alt="Hourglass"
+          className="w-28 sm:w-36 md:w-44 lg:w-52 h-auto object-contain filter drop-shadow-[0_15px_35px_rgba(255,79,163,0.3)] group-hover:-translate-y-3 group-hover:-rotate-6 group-hover:scale-110 transition-all duration-500"
+        />
+      </motion.div>
 
-            {/* Title display header (Colossal Scale) */}
-            <motion.div variants={itemVariants} className="space-y-1">
-              <h1 className="text-6xl sm:text-8xl md:text-[6.5rem] lg:text-[7rem] xl:text-[8.5rem] font-display font-extrabold tracking-tighter text-[#F5F5F5] leading-[0.78] uppercase">
-                Siddhi <br />
-                <span className="text-[#FF4FA3]">
-                  S
-                  <span className="relative inline-block">
-                    ı
-                    <span className="absolute -top-[0.28em] left-1/2 -translate-x-1/2 text-[0.45em] leading-none">
-                      ♥
-                    </span>
+      {/* Far Top-Right Corner Magnifying Glass Doodle */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, rotate: 15 }}
+        animate={{ opacity: 1, scale: 1, rotate: 12 }}
+        transition={{ duration: 0.8, delay: 0.35 }}
+        className="absolute top-20 right-6 sm:top-24 sm:right-10 lg:top-28 lg:right-16 z-20 pointer-events-auto group"
+      >
+        <img
+          src={magnifyingGlassImg}
+          alt="Magnifying Glass"
+          className="w-32 sm:w-44 md:w-56 lg:w-64 h-auto object-contain filter drop-shadow-[0_15px_35px_rgba(255,79,163,0.35)] group-hover:-translate-y-3 group-hover:-rotate-6 group-hover:scale-110 transition-all duration-500"
+        />
+      </motion.div>
+
+      {/* Far Bottom-Right Corner Brain Doodle (Below Rocket) */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+        animate={{ opacity: 1, scale: 1, rotate: -8 }}
+        transition={{ duration: 0.9, delay: 0.55 }}
+        className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 lg:bottom-12 lg:right-14 z-20 pointer-events-auto group"
+      >
+        <img
+          src={brainImg}
+          alt="Brain"
+          className="w-28 sm:w-36 md:w-44 lg:w-52 h-auto object-contain filter drop-shadow-[0_15px_35px_rgba(255,79,163,0.35)] group-hover:-translate-y-3 group-hover:rotate-6 group-hover:scale-110 transition-all duration-500"
+        />
+      </motion.div>
+
+      {/* Content wrapper - Centered Layout */}
+      <div className="max-w-4xl w-full mx-auto my-auto relative z-10 text-center flex flex-col items-center">
+        
+        {/* Left Side Graduation Hat Doodle (Higher & Closer to Title) */}
+        <motion.div
+          initial={{ opacity: 0, x: -30, rotate: -15 }}
+          animate={{ opacity: 1, x: 0, rotate: -12 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="absolute -top-8 -left-8 sm:-left-16 md:-left-28 lg:-left-40 z-20 pointer-events-auto group"
+        >
+          <img
+            src={gradHatImg}
+            alt="Graduation Hat"
+            className="w-36 sm:w-48 md:w-60 lg:w-72 h-auto object-contain filter drop-shadow-[0_15px_35px_rgba(255,79,163,0.35)] group-hover:-translate-y-3 group-hover:rotate-6 group-hover:scale-110 transition-all duration-500"
+          />
+        </motion.div>
+
+        {/* Right Side Paper Rocket Doodle */}
+        <motion.div
+          initial={{ opacity: 0, x: 30, rotate: -12 }}
+          animate={{ opacity: 1, x: 0, rotate: -8 }}
+          transition={{ duration: 0.9, delay: 0.4 }}
+          className="absolute top-1/2 -translate-y-1/2 -right-8 sm:-right-16 md:-right-28 lg:-right-40 z-20 pointer-events-auto group"
+        >
+          <img
+            src={paperRocketImg}
+            alt="Paper Rocket"
+            className="w-36 sm:w-48 md:w-60 lg:w-72 h-auto object-contain filter drop-shadow-[0_15px_35px_rgba(255,79,163,0.35)] group-hover:-translate-y-3 group-hover:rotate-3 group-hover:scale-110 transition-all duration-500"
+          />
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="space-y-10 flex flex-col items-center justify-center"
+        >
+          {/* Title display header (Colossal Scale Centered) */}
+          <motion.div variants={itemVariants} className="space-y-1">
+            <h1 className="text-6xl sm:text-8xl md:text-[6.5rem] lg:text-[7rem] xl:text-[8.5rem] font-display font-extrabold tracking-tighter text-[#F5F5F5] leading-[0.82] uppercase text-center">
+              Siddhi <br />
+              <span className="text-[#FF4FA3]">
+                S
+                <span className="relative inline-block">
+                  ı
+                  <span className="absolute -top-[0.28em] left-1/2 -translate-x-1/2 text-[0.45em] leading-none">
+                    ♥
                   </span>
-                  ngh
-                </span> <br />
-                <span className="text-transparent [-webkit-text-stroke:1px_#F5F5F5]">
-                  Rathor.
                 </span>
-                <span className="text-[#FF4FA3] text-3xl sm:text-5xl font-mono align-super ml-1.5">✦</span>
-              </h1>
-            </motion.div>
-
-            {/* Paragraph description */}
-            <motion.p
-              variants={itemVariants}
-              className="text-[#8A8A8A] max-w-lg text-sm md:text-base leading-relaxed font-body"
-            >
-              Building scalable and impactful digital products. I specialize in bridging complex engineering with elegant, user-centric design. Designed & coded as an active creative campaign.
-            </motion.p>
-
-            {/* Buttons with hover transitions */}
-            <motion.div 
-              variants={itemVariants} 
-              className="pt-2 flex flex-col sm:flex-row gap-4"
-            >
-              <a 
-                target="_blank"
-                href="https://drive.google.com/file/d/11E7YRgGmKBA-q0paemxgnJZDwedSmET8/view?usp=sharing" 
-                rel="noreferrer"
-                className="group relative inline-flex items-center justify-center px-6 py-3.5 border border-white/10 hover:border-[#FF4FA3] hover:text-[#FF4FA3] text-[#8A8A8A] transition-all duration-300 font-mono text-[9px] md:text-[10px] uppercase tracking-widest font-bold"
-              >
-                <span className="flex items-center gap-2">
-                  Download Resume 
-                  <span className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300">&nearr;</span>
-                </span>
-              </a>
-            </motion.div>
+                ngh
+              </span> <br />
+              <span className="text-transparent [-webkit-text-stroke:1px_#F5F5F5]">
+                Rathor.
+              </span>
+              <span className="text-[#FF4FA3] text-3xl sm:text-5xl font-mono align-super ml-1.5">✦</span>
+            </h1>
           </motion.div>
 
-          {/* RIGHT: PORTRAIT AND PHOTO FRAME WORK */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2">
-            <div className="relative w-full max-w-[420px] sm:max-w-[480px] md:max-w-[540px] lg:max-w-[560px] aspect-square mx-auto lg:ml-auto">
-              
-              {/* Background decorative frame accent */}
-              <div className="absolute -top-8 -right-8 w-32 aspect-square border border-white/5 bg-[#0a0a0a]/20 p-1 hidden xl:block -rotate-6 z-0 select-none">
-                <div className="w-full h-full bg-[#050505] flex items-center justify-center text-[7px] font-mono text-white/20 text-center">
-                  [ FIG. 01 ]
-                </div>
-              </div>
-
-              {/* Main Profile Frame with photoframe overlay and tilted stance */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-                onMouseMove={handleCardMouseMove}
-                onMouseLeave={handleCardMouseLeave}
-                style={{ x: cardX, y: cardY }}
-                className="relative w-full h-full group z-10 -rotate-3 hover:rotate-0 transition-transform duration-500"
-              >
-                {/* Photo fitted inside photoframe's window */}
-                <div 
-                  className="absolute overflow-hidden rounded-[1px] bg-[#050505]"
-                  style={{
-                    left: "22.5%",
-                    top: "21.5%",
-                    width: "59.2%",
-                    height: "68.8%",
-                  }}
-                >
-                  <img
-                    src={image}
-                    alt="Siddhi Singh Rathor Portrait"
-                    loading="eager"
-                    className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-
-                {/* Photoframe Overlay */}
-                <img
-                  src={photoFrame}
-                  alt="Photo Frame Overlay"
-                  loading="eager"
-                  className="absolute inset-0 w-full h-full object-contain pointer-events-none drop-shadow-[0_25px_50px_rgba(0,0,0,0.85)]"
-                />
-              </motion.div>
-            </div>
-          </div>
-
-        </div>
+          {/* Buttons with hover transitions */}
+          <motion.div 
+            variants={itemVariants} 
+            className="pt-2 flex justify-center"
+          >
+            <a 
+              target="_blank"
+              href="https://drive.google.com/file/d/11E7YRgGmKBA-q0paemxgnJZDwedSmET8/view?usp=sharing" 
+              rel="noreferrer"
+              className="group relative inline-flex items-center justify-center px-6 py-3.5 border border-white/10 hover:border-[#FF4FA3] hover:text-[#FF4FA3] text-[#8A8A8A] transition-all duration-300 font-mono text-[9px] md:text-[10px] uppercase tracking-widest font-bold"
+            >
+              <span className="flex items-center gap-2">
+                Download Resume 
+                <span className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300">&nearr;</span>
+              </span>
+            </a>
+          </motion.div>
+        </motion.div>
       </div>
 
 
