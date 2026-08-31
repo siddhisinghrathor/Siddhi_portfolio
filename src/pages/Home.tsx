@@ -164,14 +164,7 @@ const Home = () => {
             <h1 className="text-6xl sm:text-8xl md:text-[6.5rem] lg:text-[7rem] xl:text-[8.5rem] font-display font-extrabold tracking-tighter text-[#F5F5F5] leading-[0.82] uppercase text-center">
               Siddhi <br />
               <span className="text-[#FF4FA3]">
-                S
-                <span className="relative inline-block">
-                  ı
-                  <span className="absolute -top-[0.28em] left-1/2 -translate-x-1/2 text-[0.45em] leading-none">
-                    ♥
-                  </span>
-                </span>
-                ngh
+                Singh
               </span> <br />
               <span className="text-transparent [-webkit-text-stroke:1px_#F5F5F5]">
                 Rathor.
